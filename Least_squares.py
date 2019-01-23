@@ -1,7 +1,9 @@
 import numpy as np
-from  scipy.optimize import leastsq
+from scipy.optimize import leastsq
 import pandas as pd
 from pandas import DataFrame
+from matplotlib import pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 
 
 def func(x, z, p):
@@ -23,4 +25,10 @@ p0 = [10, 1, 1]
 plsq = leastsq(residuals, p0, args=(Y,X,Z))
 
 print(plsq[0])
-
+x, y, z = plsq[0]
+fig = plt.figure()
+ax = fig.gca(projection='3d')
+ax.scatter(X, Y, Z, color="red", label="sample point", linewidths=3)
+ax.plot(X, Z, func(X, Z, plsq[0]), label= "拟合数据")
+ax.legend()
+plt.show()
