@@ -103,12 +103,12 @@ plt.show()
 
 # sub = df['Close_diff_1'].fillna(0)
 ##模型的预测
-model = sm.tsa.ARIMA(sub, order=[0, 0, 1])
+model = sm.tsa.ARIMA(sub, order=[0, 2, 1])
 results = model.fit()
-predict_sunspots = results.predict()
+predict_sunspots = results.predict(exog=test)
 print(predict_sunspots)
 fig, ax = plt.subplots(figsize=(12, 8))
-ax = sub.plot(ax=ax)
+ax = df['Close_diff_2'].plot(ax=ax)
 predict_sunspots.plot(ax=ax)
 plt.show()
 
