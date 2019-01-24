@@ -8,20 +8,15 @@ import matplotlib.pyplot as plt
 df = pd.read_excel('data/date.xlsx', index_col='date', parse_dates=['date'])
 sub = df['1984':'2100']
 
-print("======")
-print(sub)
+
 train = sub.loc['1984':'2000']
 test = sub.loc['2001':'2100']
-print("======")
-print(train)
 plt.plot(train)
 plt.show()
 
 ## 差分法，使得数据更加平稳
 df['Close_diff_1'] = df['data'].diff(1)
 df['Close_diff_2'] = df['Close_diff_1'].diff(1)
-print("+++++++++++")
-print(df['Close_diff_1'].fillna(0))
 fig = plt.figure(figsize=(20, 6))
 ax1 = fig.add_subplot(131)
 ax1.plot(df['data'])
