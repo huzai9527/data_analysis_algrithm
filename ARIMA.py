@@ -71,6 +71,10 @@ ax = sns.heatmap(results_bic,
 ax.set_title('BIC')
 plt.show()
 
+# train_results = sm.tsa.arma_order_select_ic(train, ic=['aic', 'bic'], trend='nc', max_ar=8, max_ma=8)
+#
+# print('AIC', train_results.aic_min_order)
+# print('BIC', train_results.bic_min_order)
 # 拖尾和截尾
 import statsmodels.api as sm
 
@@ -99,7 +103,7 @@ plt.show()
 
 # sub = df['Close_diff_1'].fillna(0)
 ##模型的预测
-model = sm.tsa.ARIMA(sub, order=(1, 1, 1))
+model = sm.tsa.ARIMA(sub, order=[0, 0, 1])
 results = model.fit()
 predict_sunspots = results.predict()
 print(predict_sunspots)
@@ -108,4 +112,3 @@ ax = sub.plot(ax=ax)
 predict_sunspots.plot(ax=ax)
 plt.show()
 
-results.forecast()[0]
