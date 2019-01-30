@@ -5,12 +5,12 @@ import seaborn as sns
 import statsmodels.api as sm
 import pandas as pd
 import matplotlib.pyplot as plt
-df = pd.read_excel('data/date.xlsx', index_col='date', parse_dates=['date'])
-sub = df['1984':'2100']
+df = pd.read_excel('data/va.xlsx', index_col='date', parse_dates=['date'])
+sub = df['2011':'2017']
 
 
-train = sub.loc['1984':'2000']
-test = sub.loc['2001':'2100']
+train = sub.loc['2011':'2015']
+test = sub.loc['2016':'2017']
 plt.plot(train)
 plt.show()
 
@@ -98,12 +98,12 @@ plt.show()
 
 # sub = df['Close_diff_1'].fillna(0)
 ##模型的预测
-model = sm.tsa.ARIMA(sub, order=[0, 2, 1])
-results = model.fit()
-predict_sunspots = results.predict(exog=test)
-print(predict_sunspots)
-fig, ax = plt.subplots(figsize=(12, 8))
-ax = df['Close_diff_2'].plot(ax=ax)
-predict_sunspots.plot(ax=ax)
-plt.show()
+# model = sm.tsa.ARIMA(sub, order=[0, 0, 1])
+# results = model.fit()
+# predict_sunspots = results.predict('2011','2020')
+# print(predict_sunspots)
+# fig, ax = plt.subplots(figsize=(12, 8))
+# ax = df['data'].plot(ax=ax)
+# predict_sunspots.plot(ax=ax)
+# plt.show()
 
